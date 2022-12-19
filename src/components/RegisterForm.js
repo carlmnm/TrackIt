@@ -18,6 +18,7 @@ export default function UserSignIn() {
         e.preventDefault()
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
         const body = { email, name, image, password }
+
         setButtonText(                    
         <ThreeDots
             height="80"
@@ -29,11 +30,11 @@ export default function UserSignIn() {
             wrapperClassName=""
             visible={true}
         />)
+        setUsage(true)
 
 
         const promise = axios.post(URL, body)
         promise.then(res => {
-            alert("Cadastro realizado!")
             navigate("/")
 
         })
@@ -48,8 +49,8 @@ export default function UserSignIn() {
     }
 
     return (
-        <ContainerForm onSubmit={createAccount}>
-            <form disabled>
+        <ContainerForm>
+            <form onSubmit={createAccount}>
                 <Input
                     type="email"
                     placeholder="e-mail"
@@ -86,9 +87,8 @@ export default function UserSignIn() {
                     disabled={usage}
                 />
 
-                <ButtonLogin disabled={usage}>
+                <ButtonLogin type="submit" disabled={usage}>
                     {buttonText}
-
                 </ButtonLogin>
 
             </form>

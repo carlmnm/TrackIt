@@ -1,15 +1,68 @@
+import axios from "axios"
 import styled from "styled-components"
+import { useEffect, useState } from "react"
+import { ThreeDots } from 'react-loader-spinner'
+import { useNavigate } from "react-router-dom"
 
 export default function UserLogin() {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [usage, setUsage] = useState(false)
+    const [buttonText, setButtonText] = useState(<p>{"Entrar"}</p>)
+    const navigate = useNavigate()
+
+    function Login(e) {
+        e.preventDefault()
+        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
+        const body = { email, password }
+        setUsage(true)
+        setButtonText(
+            <ThreeDots
+                height="80"
+                width="51"
+                radius="9"
+                color="#ffffff"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+            />)
+
+        const promise = axios.post(URL, body)
+        promise.then((res) => {
+            console.log(res)
+            navigate("/habitos")
+
+        })
+        promise.catch((err) => {
+            alert(err.response.data.message)
+            setUsage(false)
+
+        })
+
+    }
+
     return (
         <ContainerForm>
-            <form>
-                <Input type="email" placeholder="e-mail" />
-                <Input type="password" placeholder="senha" />
-                <ButtonLogin>
-                    <p>
-                        {"Entrar"}
-                    </p>
+            <form onSubmit={Login}>
+                <Input
+                    type="email"
+                    placeholder="e-mail"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                    disabled={usage}
+                />
+                <Input
+                    type="password"
+                    placeholder="senha"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                    disabled={usage}
+                />
+                <ButtonLogin type="submit">
+                    {buttonText}
                 </ButtonLogin>
             </form>
         </ContainerForm>
@@ -41,6 +94,9 @@ width: 318px;
 height: 45px;
 background: #52B6FF;
 border-radius: 5px;
+display: flex;
+justify-content: center;
+align-items: center;
 p{
     font-family: 'Lexend Deca';
     font-style: normal;
