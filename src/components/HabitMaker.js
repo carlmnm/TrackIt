@@ -4,7 +4,7 @@ import Context from "./Context"
 import React, { useContext } from 'react'
 
 export default function CreatingHabits() {
-    const { userInfo, setUserInfo, token, setToken, show, setShow } = useContext(Context)
+    const { show } = useContext(Context)
     const week = [
         {id: 0, name: "D"},
         {id: 1, name: "S"},
@@ -26,7 +26,7 @@ export default function CreatingHabits() {
         }
     }*/}
     return(
-        <HabitCreationWindow>
+        <HabitCreationWindow visibility={show}>
 
         </HabitCreationWindow>
     )
@@ -40,7 +40,7 @@ width: 340px;
 height: 180px;
 margin-left: 17px;
 margin-top: 0px;
-display: ${props => props.visibility ? "flex" : "none"};
+display: ${props => props.visibility === "true" ? "flex" : "none"};
 
 background: #FFFFFF;
 border-radius: 5px;

@@ -69,7 +69,7 @@ export default function UserLogin() {
                     required
                     disabled={usage}
                 />
-                <ButtonLogin data-test="login-btn" type="submit">
+                <ButtonLogin disabled={usage} data-test="login-btn" type="submit">
                     {buttonText}
                 </ButtonLogin>
             </form>

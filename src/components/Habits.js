@@ -24,11 +24,17 @@ export default function MyHabits() {
 
     })
 
-    function openCard(){
-        setShow("true")
+    function openCard() {
+        if (show === "false") {
+            setShow("true")
+        } else if (show === "true") {
+            setShow("false")
+        }
+        console.log(show)
     }
 
-    
+
+
 
     return (
         <ContainerHabits>
@@ -43,7 +49,7 @@ export default function MyHabits() {
                     </p>
                 </button>
             </SubHeader>
-            <CreatingHabits/>
+            <CreatingHabits />
             <InitialText>
                 <p>
                     {"Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!"}
@@ -106,7 +112,7 @@ button{
 }
 `
 
-const InitialText =styled.div`
+const InitialText = styled.div`
 width: 338px;
 height: 74px;
 margin-top: 20px;
