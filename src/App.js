@@ -11,14 +11,20 @@ function App() {
   const [userInfo, setUserInfo] = useState({})
   const [token, setToken] = useState("")
   const [show, setShow] = useState("false")
+  const [habits, setHabits] = useState({
+    name: "",
+    days: []
+  })
+
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <Context.Provider value={{userInfo, setUserInfo, token, setToken, show, setShow}}>
+      <Context.Provider value={{userInfo, setUserInfo, token, setToken, show, setShow, habits, setHabits}}>
         <Routes>
           <Route path="/" element={<Screen1 />} />
           <Route path="/cadastro" element={<Register />} />
           <Route path="/habitos" element={<Habits />} />
+
         </Routes>
       </Context.Provider>
     </BrowserRouter>

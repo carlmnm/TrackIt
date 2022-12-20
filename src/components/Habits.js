@@ -9,11 +9,12 @@ import CreatingHabits from "./HabitMaker"
 
 export default function MyHabits() {
     const [createdHabits, setCreatedHabits] = useState([])
-    const { userInfo, setUserInfo, token, setToken, show, setShow } = useContext(Context)
+    const { token, show, setShow } = useContext(Context)
     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
+    //const tok = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzYxMSwiaWF0IjoxNjcxNTU5NDY2fQ.t2vsvOYCbPoYlioL4Oeii7tVlXvImkUMPdgIC4lkjRU"
     const config = {
         headers: {
-            Authorization: `Bearer ${token}`
+            "Authorization": `Bearer ${token}`
         }
     }
 
@@ -21,8 +22,10 @@ export default function MyHabits() {
         const promise = axios.get(URL, config)
 
         promise.then((res) => setCreatedHabits(res.data))
+        console.log(token)
 
-    })
+
+    }, [])
 
     function openCard() {
         if (show === "false") {
@@ -30,7 +33,7 @@ export default function MyHabits() {
         } else if (show === "true") {
             setShow("false")
         }
-        console.log(show)
+        //console.log(show)
     }
 
 
@@ -50,6 +53,11 @@ export default function MyHabits() {
                 </button>
             </SubHeader>
             <CreatingHabits />
+            <HabitCard>
+                {createdHabits.map((item) => 
+                item.name
+                )}
+            </HabitCard>
             <InitialText>
                 <p>
                     {"Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!"}
@@ -125,5 +133,12 @@ p{
     color: #666666;
 }
 
+`
+
+const HabitCard = styled.div`
+width: 340px;
+height: 91px;
+background-color: #FFFFFF;
+border-radius: 5px;
 `
 

@@ -7,7 +7,7 @@ import React, { useContext } from 'react'
 import Context from "./Context"
 
 export default function UserLogin() {
-    const { userInfo, setUserInfo, token, setToken, show, setSHow } = useContext(Context)
+    const { setUserInfo, setToken } = useContext(Context)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [usage, setUsage] = useState(false)
@@ -35,7 +35,9 @@ export default function UserLogin() {
 
         const promise = axios.post(URL, body)
         promise.then((res) => {
-            setToken(res.data.token)
+            localStorage.setItem("mytoken", res.data.token)
+            const meuToken = localStorage.getItem("mytoken")
+            setToken(meuToken)
             setUserInfo(res.data)
             navigate("/habitos")
 
