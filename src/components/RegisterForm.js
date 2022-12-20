@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { ThreeDots } from 'react-loader-spinner'
+import React, {useContext} from 'react'
+import Context from "./Context"
 
 
 export default function UserSignIn() {
@@ -36,7 +38,6 @@ export default function UserSignIn() {
         const promise = axios.post(URL, body)
         promise.then(res => {
             navigate("/")
-
         })
 
         promise.catch((err) => {
@@ -52,6 +53,7 @@ export default function UserSignIn() {
         <ContainerForm>
             <form onSubmit={createAccount}>
                 <Input
+                    data-test="email-input"
                     type="email"
                     placeholder="e-mail"
                     value={email}
@@ -61,6 +63,7 @@ export default function UserSignIn() {
                 />
 
                 <Input
+                    data-test="password-input"
                     type="password"
                     placeholder="senha"
                     value={password}
@@ -70,6 +73,7 @@ export default function UserSignIn() {
                 />
 
                 <Input
+                    data-test="user-name-input"
                     type="text"
                     placeholder="nome"
                     value={name}
@@ -79,6 +83,7 @@ export default function UserSignIn() {
                 />
 
                 <Input
+                    data-test="user-image-input"
                     type="url"
                     placeholder="foto"
                     value={image}
@@ -87,7 +92,7 @@ export default function UserSignIn() {
                     disabled={usage}
                 />
 
-                <ButtonLogin type="submit" disabled={usage}>
+                <ButtonLogin data-test="signup-btn" type="submit" disabled={usage}>
                     {buttonText}
                 </ButtonLogin>
 

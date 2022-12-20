@@ -8,7 +8,7 @@ export default function SignIn() {
         <ContainerRegister>
             <img src={logo} />
             <UserSignIn/>
-            <Link to={`/`}>
+            <Link data-test="login-link" to={`/`}>
                 <h1>
                     {"Já tem uma conta? Faça login!"}
                 </h1>

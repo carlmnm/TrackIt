@@ -8,7 +8,7 @@ export default function LoginScreen() {
         <ContainerLogin>
             <img src={logo} />
             <UserLogin/>
-            <Link to={`/cadastro`}>
+            <Link data-test="signup-link" to={`/cadastro`}>
                 <h1>
                     {"Não tem uma conta? Cadastre-se!"}
                 </h1>

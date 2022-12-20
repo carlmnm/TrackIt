@@ -3,13 +3,18 @@ import styled from "styled-components"
 import { useEffect, useState } from "react"
 import { ThreeDots } from 'react-loader-spinner'
 import { useNavigate } from "react-router-dom"
+import React, { useContext } from 'react'
+import Context from "./Context"
 
 export default function UserLogin() {
+    const { userInfo, setUserInfo, token, setToken, show, setSHow } = useContext(Context)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [usage, setUsage] = useState(false)
     const [buttonText, setButtonText] = useState(<p>{"Entrar"}</p>)
     const navigate = useNavigate()
+
+
 
     function Login(e) {
         e.preventDefault()
@@ -30,7 +35,8 @@ export default function UserLogin() {
 
         const promise = axios.post(URL, body)
         promise.then((res) => {
-            console.log(res)
+            setToken(res.data.token)
+            setUserInfo(res.data)
             navigate("/habitos")
 
         })
@@ -46,6 +52,7 @@ export default function UserLogin() {
         <ContainerForm>
             <form onSubmit={Login}>
                 <Input
+                    data-test="email-input"
                     type="email"
                     placeholder="e-mail"
                     value={email}
@@ -54,6 +61,7 @@ export default function UserLogin() {
                     disabled={usage}
                 />
                 <Input
+                    data-test="password-input"
                     type="password"
                     placeholder="senha"
                     value={password}
@@ -61,7 +69,7 @@ export default function UserLogin() {
                     required
                     disabled={usage}
                 />
-                <ButtonLogin type="submit">
+                <ButtonLogin data-test="login-btn" type="submit">
                     {buttonText}
                 </ButtonLogin>
             </form>
